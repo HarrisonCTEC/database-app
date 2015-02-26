@@ -3,6 +3,7 @@ package harrisonctec.view;
 import harrisonctec.controller.DatabaseController;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class DatabaseFrame extends JFrame
 {
@@ -24,5 +25,10 @@ public class DatabaseFrame extends JFrame
 		this.setContentPane(basePanel);
 		this.setVisible(true);
 		this.setResizable(false);
+	}
+	
+	public void showMessageDialog(String Message)
+	{
+		JOptionPane.showMessageDialog(this, Message);
 	}
 }
