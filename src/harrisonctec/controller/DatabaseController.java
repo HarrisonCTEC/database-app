@@ -11,12 +11,18 @@ public class DatabaseController
 	private DatabasePanel basePanel;
 	private SQLController baseSQL;
 	
+	/**
+	 * The main project controller
+	 */
 	public DatabaseController()
 	{
 		baseFrame = new DatabaseFrame(this);
 		baseSQL = new SQLController(this);
 	}
 	
+	/**
+	 * Open the main window
+	 */
 	public void start()
 	{
 		DatabasePanel basePanel = (DatabasePanel) baseFrame.getContentPane();
@@ -31,9 +37,13 @@ public class DatabaseController
 		return baseFrame;
 	}
 
-	public void showMessageDialog(String Message)
+	/**
+	 * Show a message in a popup window
+	 * @param message The text to show
+	 */
+	public void showMessageDialog(String message)
 	{
-		baseFrame.showMessageDialog(Message);
+		baseFrame.showMessageDialog(message);
 		
 	}
 }

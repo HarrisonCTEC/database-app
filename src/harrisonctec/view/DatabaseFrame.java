@@ -10,6 +10,10 @@ public class DatabaseFrame extends JFrame
 	private DatabasePanel basePanel;
 	private DatabaseController baseController;
 	
+	/**
+	 * The main window
+	 * @param baseController The main controller
+	 */
 	public DatabaseFrame(DatabaseController baseController)
 	{
 		setTitle("Database App");
@@ -19,6 +23,9 @@ public class DatabaseFrame extends JFrame
 		setupFrame();
 	}
 	
+	/**
+	 * Setup the window parameters
+	 */
 	private void setupFrame()
 	{
 		this.setSize(1024, 768);
@@ -27,8 +34,12 @@ public class DatabaseFrame extends JFrame
 		this.setResizable(false);
 	}
 	
-	public void showMessageDialog(String Message)
+	/**
+	 * Display a popup message with JOptionPane
+	 * @param message
+	 */
+	public void showMessageDialog(String message)
 	{
-		JOptionPane.showMessageDialog(this, Message);
+		JOptionPane.showMessageDialog(this, message);
 	}
 }

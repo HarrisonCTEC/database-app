@@ -12,6 +12,10 @@ public class SQLController
 	private Connection databaseConnection;
 	private DatabaseController baseController;
 	
+	/**
+	 * Connect to and control a database
+	 * @param baseController the main app controller
+	 */
 	public SQLController(DatabaseController baseController)
 	{
 		this.baseController = baseController;
@@ -20,6 +24,9 @@ public class SQLController
 		setupConnection();
 	}
 
+	/**
+	 * Check and see if the MySQL dirver is installed
+	 */
 	private void checkDriver()
 	{
 		try
@@ -34,6 +41,9 @@ public class SQLController
 		
 	}
 	
+	/**
+	 * Connect to the database
+	 */
 	private void setupConnection()
 	{
 		try
@@ -46,6 +56,9 @@ public class SQLController
 		}
 	}
 	
+	/**
+	 * Disconnect from the database
+	 */
 	public void closeConnection()
 	{
 		try
@@ -58,6 +71,10 @@ public class SQLController
 		}
 	}
 	
+	/**
+	 * Send SQL related errors to the baseController to be displayed
+	 * @param currentException The error to be displayed
+	 */
 	public void displayErrors(Exception currentException)
 	{
 		

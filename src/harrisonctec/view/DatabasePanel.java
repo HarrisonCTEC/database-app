@@ -11,6 +11,10 @@ public class DatabasePanel extends JPanel
 	private DatabaseController baseController;
 	private SpringLayout baseLayout;
 	
+	/**
+	 * The main layout
+	 * @param baseController The main controller
+	 */
 	public DatabasePanel(DatabaseController baseController)
 	{
 		this.baseController = baseController;
@@ -19,6 +23,9 @@ public class DatabasePanel extends JPanel
 		setupPanel();
 	}
 
+	/**
+	 * Setup the panel parameters
+	 */
 	private void setupPanel()
 	{
 		this.setLayout(baseLayout);
