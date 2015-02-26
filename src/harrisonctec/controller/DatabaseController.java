@@ -22,6 +22,10 @@ public class DatabaseController
 		DatabasePanel basePanel = (DatabasePanel) baseFrame.getContentPane();
 	}
 
+	/**
+	 * Returns the main window frame
+	 * @return main window frame
+	 */
 	public DatabaseFrame getAppFrame()
 	{
 		return baseFrame;
