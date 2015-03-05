@@ -2,7 +2,9 @@ package harrisonctec.controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
@@ -54,6 +56,29 @@ public class SQLController
 		{
 			displayErrors(currentException);
 		}
+	}
+	
+	public String displayTables()
+	{
+		String tableNames = "";
+		String query = "SHOW TABLES";
+		
+		try
+		{
+			Statement firstStatement = databaseConnection.createStatement();
+			ResultSet answers = firstStatement.executeQuery(query);
+			
+			while(answers.next())
+			{
+				tableNames += answers.getString(1) + "\n";
+			}
+		}
+		catch(SQLException currentError)
+		{
+			displayErrors(currentError);
+		}
+		
+		return tableNames;
 	}
 	
 	/**

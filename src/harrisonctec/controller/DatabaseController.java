@@ -36,6 +36,11 @@ public class DatabaseController
 	{
 		return baseFrame;
 	}
+	
+	public SQLController getDataController()
+	{
+		return baseSQL;
+	}
 
 	/**
 	 * Show a message in a popup window
