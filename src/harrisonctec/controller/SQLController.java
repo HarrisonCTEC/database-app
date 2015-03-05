@@ -81,6 +81,27 @@ public class SQLController
 		return tableNames;
 	}
 	
+	public int insertSample()
+	{
+		int rowsAffected = -1;
+		
+		String query = "INSERT INTO `h_sample`.`cities` (`name`, `population`) VALUES ('Me',1)";
+		
+		
+		try
+		{
+			Statement insertStatement = databaseConnection.createStatement();
+			rowsAffected = insertStatement.executeUpdate(query);
+			insertStatement.close();
+		}
+		catch(SQLException currentError)
+		{
+			
+		}
+		return rowsAffected;
+		
+	}
+	
 	/**
 	 * Disconnect from the database
 	 */

@@ -61,8 +61,8 @@ public class DatabasePanel extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent click)
 			{
-				String results = baseController.getDataController().displayTables();
-				displayArea.setText(results);
+				int results = baseController.getDataController().insertSample();
+				displayArea.setText(displayArea.getText() + "Rows Affected: " + results);
 				
 			}
 			
