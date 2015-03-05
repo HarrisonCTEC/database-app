@@ -103,7 +103,7 @@ public class SQLController
 	public void displayErrors(Exception currentException)
 	{
 		
-		baseController.showMessageDialog("Exception: " + currentException.getMessage());
+		baseController.showMessageDialog("Exception: " + currentException.toString());
 		if(currentException instanceof SQLException)
 		{
 			baseController.showMessageDialog("SQL State: " + ((SQLException) currentException).getSQLState());
