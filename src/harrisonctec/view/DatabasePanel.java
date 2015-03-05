@@ -28,8 +28,7 @@ public class DatabasePanel extends JPanel
 	public DatabasePanel(DatabaseController baseController)
 	{
 		this.baseController = baseController;
-		this.baseLayout = new SpringLayout();
-		
+		baseLayout = new SpringLayout();
 		queryButton = new JButton("query");
 		displayArea = new JTextArea(10,30);
 		displayPane = new JScrollPane(displayArea);
@@ -45,6 +44,13 @@ public class DatabasePanel extends JPanel
 		this.setLayout(baseLayout);
 		this.add(displayPane);
 		this.add(queryButton);
+	}
+	
+	private void setupDisplayPane()
+	{
+		displayArea.setWrapStyleWord(true);
+		displayArea.setLineWrap(true);
+		displayArea.setEditable(false);
 	}
 	
 	private void setupListeners()
