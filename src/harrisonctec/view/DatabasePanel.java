@@ -29,11 +29,19 @@ public class DatabasePanel extends JPanel
 	{
 		this.baseController = baseController;
 		baseLayout = new SpringLayout();
-		queryButton = new JButton("query");
 		displayArea = new JTextArea(10,30);
 		displayPane = new JScrollPane(displayArea);
 		
 		setupPanel();
+		setupListeners();
+		setupLayout();
+	}
+
+	private void setupLayout()
+	{
+		baseLayout.putConstraint(SpringLayout.NORTH, queryButton, 14, SpringLayout.SOUTH, displayPane);
+		baseLayout.putConstraint(SpringLayout.WEST, queryButton, 10, SpringLayout.WEST, this);
+		
 	}
 
 	/**
@@ -42,8 +50,9 @@ public class DatabasePanel extends JPanel
 	private void setupPanel()
 	{
 		this.setLayout(baseLayout);
-		this.add(displayPane);
+		queryButton = new JButton("query");
 		this.add(queryButton);
+		this.add(displayPane);
 	}
 	
 	private void setupDisplayPane()
