@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.ResultSetMetaData;
 
 import javax.swing.JOptionPane;
 
@@ -115,6 +116,36 @@ public class SQLController
 		{
 			displayErrors(e);
 		}
+	}
+	
+	public String[] getMetaDataTitles()
+	{
+		String[] columns;
+		String query = "SHOW TABLES";
+		
+		try
+		{
+			Statement firstStatement = databaseConnection.createStatement();
+			ResultSet answers = firstStatement.executeQuery(query);
+			ResultSetMetaData answerData = answers.getMetaData();
+			
+			columns = new String[answerData.getColumnCount()];
+			
+			for(int column = 0; column < answerData.getColumnCount(); column++)
+			{
+				columns[column] = answerData.getColumnName(column+1);
+			}
+			
+			answers.close();
+			firstStatement.close();
+		}
+		catch(SQLException currentException)
+		{
+			columns = new String[] {};
+			displayErrors(currentException);
+		}
+		
+		return columns;
 	}
 	
 	/**
