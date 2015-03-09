@@ -29,19 +29,22 @@ public class DatabasePanel extends JPanel
 	{
 		this.baseController = baseController;
 		baseLayout = new SpringLayout();
-		displayArea = new JTextArea(10,30);
-		displayPane = new JScrollPane(displayArea);
+		displayPane = new JScrollPane();
 		
 		setupPanel();
 		setupListeners();
 		setupLayout();
+		setupDisplayPane();
 	}
 
 	private void setupLayout()
 	{
-		baseLayout.putConstraint(SpringLayout.NORTH, queryButton, 14, SpringLayout.SOUTH, displayPane);
 		baseLayout.putConstraint(SpringLayout.WEST, queryButton, 10, SpringLayout.WEST, this);
-		
+		baseLayout.putConstraint(SpringLayout.SOUTH, queryButton, -10, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, displayArea, 0, SpringLayout.SOUTH, displayPane);
+		baseLayout.putConstraint(SpringLayout.WEST, displayArea, 0, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, displayArea, -10, SpringLayout.NORTH, queryButton);
+		baseLayout.putConstraint(SpringLayout.EAST, displayArea, 0, SpringLayout.EAST, this);
 	}
 
 	/**
@@ -53,6 +56,8 @@ public class DatabasePanel extends JPanel
 		queryButton = new JButton("query");
 		this.add(queryButton);
 		this.add(displayPane);
+		displayArea = new JTextArea(10,30);
+		add(displayArea);
 	}
 	
 	private void setupDisplayPane()
