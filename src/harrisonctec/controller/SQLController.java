@@ -148,6 +148,39 @@ public class SQLController
 		return columns;
 	}
 	
+	public String[][] testResults()
+	{
+		String[][] results;
+		String query = "SHOW TABLES";
+		
+		try
+		{
+			Statement firstStatement = databaseConnection.createStatement();
+			ResultSet answers = firstStatement.executeQuery(query);
+			
+			answers.last();
+			int numberOfRows = answers.getRow();
+			answers.beforeFirst();
+			
+			results = new String [numberOfRows][1];
+			
+			while(answers.next())
+			{
+				results[answers.getRow()-1][0] = answers.getString(1);
+			}
+			
+			answers.close();
+			firstStatement.close();
+		}
+		catch(SQLException currentException)
+		{
+			results = new String[][] {{}};
+			displayErrors(currentException);
+		}
+		
+		return results;
+	}
+	
 	/**
 	 * Send SQL related errors to the baseController to be displayed
 	 * @param currentException The error to be displayed

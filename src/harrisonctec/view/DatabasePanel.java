@@ -8,8 +8,10 @@ import harrisonctec.controller.DatabaseController;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.SpringLayout;
+import javax.swing.table.DefaultTableModel;
 
 public class DatabasePanel extends JPanel
 {
@@ -35,6 +37,14 @@ public class DatabasePanel extends JPanel
 		setupListeners();
 		setupLayout();
 		setupDisplayPane();
+		setupTable();
+	}
+
+	private void setupTable()
+	{
+		DefaultTableModel basicData = new DefaultTableModel(baseController.getDataController().testResults(), baseController.getDataController().getMetaDataTitles());
+		JTable resultsTable = new JTable(basicData);
+		displayPane = new JScrollPane(resultsTable);
 	}
 
 	private void setupLayout()
