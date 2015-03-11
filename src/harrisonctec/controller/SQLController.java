@@ -59,6 +59,10 @@ public class SQLController
 		}
 	}
 	
+	/**
+	 * Returns a display of the table 
+	 * @return
+	 */
 	public String displayTables()
 	{
 		String tableNames = "";
@@ -82,6 +86,10 @@ public class SQLController
 		return tableNames;
 	}
 	
+	/**
+	 * Inserts a pre-defined test string into the database
+	 * @return rows affected
+	 */
 	public int insertSample()
 	{
 		int rowsAffected = -1;
@@ -118,6 +126,10 @@ public class SQLController
 		}
 	}
 	
+	/**
+	 * Get metadata about the result set
+	 * @return
+	 */
 	public String[] getMetaDataTitles()
 	{
 		String[] columns;
@@ -148,6 +160,10 @@ public class SQLController
 		return columns;
 	}
 	
+	/**
+	 * Get info about the tables
+	 * @return
+	 */
 	public String[][] testResults()
 	{
 		String[][] results;

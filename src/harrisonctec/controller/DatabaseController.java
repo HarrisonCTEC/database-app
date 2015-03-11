@@ -37,6 +37,10 @@ public class DatabaseController
 		return baseFrame;
 	}
 	
+	/**
+	 * Returns the data controller
+	 * @return The data controller
+	 */
 	public SQLController getDataController()
 	{
 		return baseSQL;
