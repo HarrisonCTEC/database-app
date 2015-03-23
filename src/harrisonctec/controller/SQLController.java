@@ -28,6 +28,15 @@ public class SQLController
 		checkDriver();
 		setupConnection();
 	}
+	
+	public void connectionStringBuilder(String pathToDBServer, String databaseName, String userName, String password)
+	{
+		connectionString = "jdbc:mysql://";
+		connectionString += pathToDBServer;
+		connectionString += "/" + databaseName;
+		connectionString += "?=user" + "userName";
+		connectionString += "&password=" + password;
+	}
 
 	/**
 	 * Check and see if the MySQL dirver is installed
@@ -254,6 +263,50 @@ public class SQLController
 		}
 		
 		return results;
+	}
+	
+	private boolean checkForStructureViolation()
+	{
+		if(query.toUpperCase().contains(" DATABASE "))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public void dropStatement()
+	{
+		String results;
+		try
+		{
+			if(checkForStructureViolation())
+			{
+				throw new SQLException("exception!", "", Integer.MIN_VALUE);
+			}
+			
+			if(query.toUpperCase().contains(" INDEX "))
+			{
+				results = "The index was";
+			}
+			else
+			{
+				results = "The table was";
+			}
+			
+			Statement dropStatement = databaseConnection.createStatement();
+			int affected = dropStatement.executeUpdate(query);
+			
+			dropStatement.close();
+			
+			if(affected == 0)
+			{
+				results += "dropped";
+			}
+			JOptionPane.showMessageDialog(baseController.getAppFrame(), "?");
+		}
 	}
 	
 	/**
