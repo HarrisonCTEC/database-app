@@ -7,6 +7,7 @@ import harrisonctec.controller.DatabaseController;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -32,6 +33,8 @@ public class DatabasePanel extends JPanel
 		this.baseController = baseController;
 		baseLayout = new SpringLayout();
 		displayPane = new JScrollPane();
+		
+		JPasswordField samplePassword = new JPasswordField(null, 20);
 		
 		setupPanel();
 		setupListeners();
@@ -68,6 +71,8 @@ public class DatabasePanel extends JPanel
 		this.add(displayPane);
 		displayArea = new JTextArea(10,30);
 		add(displayArea);
+		
+		
 	}
 	
 	private void setupDisplayPane()
