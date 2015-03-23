@@ -15,6 +15,8 @@ public class SQLController
 	private Connection databaseConnection;
 	private DatabaseController baseController;
 	
+	private String query;
+	
 	/**
 	 * Connect to and control a database
 	 * @param baseController the main app controller
@@ -22,7 +24,7 @@ public class SQLController
 	public SQLController(DatabaseController baseController)
 	{
 		this.baseController = baseController;
-		this.connectionString = "jdbc:mysql://localhost/h_sample?user=root";
+		this.connectionString = "jdbc:mysql://localhost/performance_schema?user=root";
 		checkDriver();
 		setupConnection();
 	}
@@ -158,6 +160,100 @@ public class SQLController
 		}
 		
 		return columns;
+	}
+	
+	public String[][] realResults()
+	{
+		String[][] results;
+		String query = "SELECT * FROM `INNODB_SYS_COLUMNS";
+			
+		try
+		{
+			Statement firstStatement = databaseConnection.createStatement();
+			ResultSet answers = firstStatement.executeQuery(query);
+			int columnCount = answers.getMetaData().getColumnCount();
+				
+			answers.last();
+			int numberOfRows = answers.getRow();
+			answers.beforeFirst();
+				
+			results = new String [numberOfRows][1];
+				
+			while(answers.next())
+			{
+				for(int col = 0; col< columnCount; col++)
+				{
+					results[answers.getRow()-1][0] = answers.getString(1);
+				}
+			}
+				
+			answers.close();
+			firstStatement.close();
+		}
+		catch(SQLException currentException)
+		{
+			results = new String[][] {{}};
+			displayErrors(currentException);
+		}
+		
+		return results;
+	}
+	
+	private boolean checkQueryForDataViolation()
+	{
+		if(query.toUpperCase().contains(" DROP ")
+		   || query.toUpperCase().contains(" TRUNCATE ")
+		   || query.toUpperCase().contains(" SET ")
+		   || query.toUpperCase().contains(" ALTER "))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public String[][] selectQueryResults(String query)
+	{
+		String[][] results;
+		this.query = query;
+			
+		try
+		{
+			if(checkQueryForDataViolation())
+			{
+				throw new SQLException("Data Violation!", "", Integer.MIN_VALUE);
+			}
+			
+			Statement firstStatement = databaseConnection.createStatement();
+			ResultSet answers = firstStatement.executeQuery(query);
+			int columnCount = answers.getMetaData().getColumnCount();
+				
+			answers.last();
+			int numberOfRows = answers.getRow();
+			answers.beforeFirst();
+				
+			results = new String [numberOfRows][1];
+				
+			while(answers.next())
+			{
+				for(int col = 0; col< columnCount; col++)
+				{
+					results[answers.getRow()-1][0] = answers.getString(1);
+				}
+			}
+				
+			answers.close();
+			firstStatement.close();
+		}
+		catch(SQLException currentException)
+		{
+			results = new String[][] {{}};
+			displayErrors(currentException);
+		}
+		
+		return results;
 	}
 	
 	/**
