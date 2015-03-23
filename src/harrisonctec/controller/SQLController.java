@@ -307,6 +307,10 @@ public class SQLController
 			}
 			JOptionPane.showMessageDialog(baseController.getAppFrame(), "?");
 		}
+		catch(SQLException e)
+		{
+			displayErrors(e);
+		}
 	}
 	
 	/**
